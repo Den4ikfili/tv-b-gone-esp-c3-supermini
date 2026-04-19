@@ -4,6 +4,7 @@
 #define IR_LED_PIN 6 
 #define BUTTON_PIN 5 
 
+
 struct IrCode {
   uint8_t timer_val;
   uint8_t numpairs;
