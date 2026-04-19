@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <IRsend.h>
 
-#define IR_LED_PIN 6   // Пін ІЧ-діода (ТІЛЬКИ ЧЕРЕЗ ТРАНЗИСТОР, коли припаяєш назад!)
+#define IR_LED_PIN 6 
 #define BUTTON_PIN 5   
 
 struct IrCode {
@@ -27,7 +27,7 @@ uint8_t bitsLeft = 0;
 uint8_t currentBits = 0;
 uint8_t codePtr = 0;
 const IrCode* currentPowerCode = nullptr;
-uint16_t rawBuffer[512]; // Збільшив буфер із запасом
+uint16_t rawBuffer[512]; 
 
 bool sendRegionCodes(const IrCode* const* regionCodes, uint8_t numCodes, const char* regionName);
 
@@ -64,7 +64,7 @@ bool sendRegionCodes(const IrCode* const* regionCodes, uint8_t numCodes, const c
     uint8_t numpairs = currentPowerCode->numpairs;
     uint8_t bitcompression = currentPowerCode->bitcompression;
 
-    // ЗАПОБІЖНИК: Уникаємо ділення на нуль
+    
     if (freq == 0) {
       freq = 38; 
     }
@@ -72,7 +72,7 @@ bool sendRegionCodes(const IrCode* const* regionCodes, uint8_t numCodes, const c
     bitsLeft = 0;
     codePtr = 0;
 
-    // Захист від переповнення буфера
+ 
     if (numpairs * 2 > 512) {
       Serial.println("Помилка: Код занадто великий!");
       continue;
@@ -96,7 +96,6 @@ bool sendRegionCodes(const IrCode* const* regionCodes, uint8_t numCodes, const c
 }
 
 void setup() {
-  // Даємо час USB підключитись і прокинутись після ребуту
   delay(3000); 
   
   Serial.begin(115200);
